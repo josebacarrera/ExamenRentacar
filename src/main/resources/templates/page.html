@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Gestor de Vehiculos</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<nav>
+		<logo></logo>
+		<nombrepagina>Rent a Car</nombrepagina>
+		<acciones>
+
+			<!-- BEGIN :: EDITAR CON THYMELEAF -->
+
+			<a id="nuevo" class="btn" th:if="${modo=='edicion'}">Añadir Nuevo</a>
+			<a class="btn" th:if="${modo!='edicion'}" href="/?modo=edicion">Cambiar a Modo Edición</a>
+			<a class="btn" th:if="${modo=='edicion'}" href="/">Cambiar a Modo Vista</a>
+			<!-- END :: EDITAR CON THYMELEAF -->
+
+		</acciones>
+	</nav>
+
+
+	<table>
+		<!-- BEGIN :: EDITAR CON THYMELEAF -->
+		<tr>
+			<th class="action" th:if="${modo=='edicion'}">Eliminar</th>
+
+			<th>Matrícula</th>
+			<th>Marca</th>
+			<th>Modelo</th>
+			<th>Color</th>
+			<th>Cliente</th>
+			
+			<th class="action" th:if="${modo=='edicion'}" >Editar</th>
+
+		</tr>
+
+
+		<!-- para escribir data-id="1" con thymeleaf debeis escribir th:attr="data-id=${variable_que_contiene_id_del_vehiculo}"  -->
+		<tr class="vehiculo" th:each="vehiculo:${vehiculos}" th:attr="data-id=${vehiculo.id}" data-id="1">
+
+			<td class="action" th:if="${modo=='edicion'}" ><span class="btn eliminar">X</span></td>
+
+			<td class="matricula" th:text="${vehiculo.matricula}">Matrícula</td>
+			<td class="marca" th:text="${vehiculo.marca}">Marca</td>
+			<td class="modelo" th:text="${vehiculo.modelo}">Modelo</td>
+			<td class="color" th:text="${vehiculo.color}">Color</td>
+
+			<td class="cliente" th:each="cliente:${clientes}" th:if="${vehiculo.cliente_id==cliente.id && vehiculo.cliente_id!=0}" th:text="${cliente.nombre + ' '+ cliente.apellido}">Nombre Cliente</td>
+			<td class="cliente"  th:if="${vehiculo.cliente_id==0}" >-- No asignado --</td>
+			
+			<td class="action" th:if="${modo=='edicion'}"><span class="btn editar">E</span></td>
+		
+		</tr>
+		<!-- END :: EDITAR CON THYMELEAF -->
+	</table>
+	
+
+
+	<!-- NO TOCAR A PARTIR DE AQUÍ -->
+
+
+	<modal class="hidden">
+		<modalbox>
+			<h3 id="titulomodal">Insertar</h3>
+			<input type="hidden" id="id_vehiculo"/>
+			<label for="matricula"><div>Matrícula:</div></label>
+			<input type="text" id="matricula"/>
+			<label for="marca"><div>Marca:</div></label>
+			<input type="text" id="marca"/>
+			<label for="modelo"><div>Modelo:</div></label>
+			<input type="text" id="modelo"/>
+			<label for="color"><div>Color:</div></label>
+			<input type="text" id="color"/>
+			<label for="cliente_id"><div>Cliente:</div></label>
+			<select id="cliente_id">
+			</select>
+			<br><br>
+			<div style="text-align: center;">
+				<a id="enviar" class="btn">Guardar</a>
+			</div>
+		</modalbox>
+	</modal>
+	
+	<script src="js/jquery.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
