@@ -27,14 +27,14 @@ public class MainControllers {
 	
 	@RequestMapping("/")
 	public String main(Model model, @RequestParam Map<String, String> params) {
-		model.addAttribute("vehiculos", vm.selectAll());
-		model.addAttribute("clientes", cm.selectAll());
+		model.addAttribute("", vm.selectAll());
+		model.addAttribute("", cm.selectAll());
 		
 		if (params.get("modo")!=null){
 			model.addAttribute("modo", params.get("modo"));
 		}
 
-		return "page";
+		return "";
 	}
 	
 	

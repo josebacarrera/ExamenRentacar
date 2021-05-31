@@ -18,7 +18,6 @@ import examen.model.bean.Vehiculo;
 import examen.model.dao.ClienteModelo;
 import examen.model.dao.VehiculoModelo;
 
-
 @RestController
 @RequestMapping("/api")
 public class RestControllers {
@@ -31,12 +30,8 @@ public class RestControllers {
 	
 	@Autowired
 	VehiculoModelo vm;
-	
-	
 
 	//selectAll vehiculos
-	 
-	 
 	@GetMapping("/vehiculos")
 	public Map<String, Object> productos() {
 		Map<String, Object> m = new HashMap<String, Object>();
@@ -59,11 +54,9 @@ public class RestControllers {
 	//idvehiculo
 	@GetMapping("/vehiculos/{id}")
 	public Vehiculo idVehiculo(@PathVariable int id) {
-
-
 		return vm.vehiculoId(id);
 
-	}
+	}  
 	
 	//añadir vehiculo
 	@PostMapping ("/vehiculos")

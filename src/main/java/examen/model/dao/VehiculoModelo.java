@@ -13,9 +13,8 @@ public class VehiculoModelo {
 		@Autowired
 		JdbcTemplate db;
 		
-		
-		//Mostrar todo
-		public ArrayList<Vehiculo> selectAll(){
+		//SellectAll
+       public ArrayList<Vehiculo> selectAll(){
 			ArrayList<Vehiculo> v = new ArrayList<Vehiculo>();
 
 			String sql="Select * from vehicles o where deleted=0";
